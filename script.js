@@ -6,10 +6,10 @@ let calculus = [];
 function insertNumber(number) {
     if (choseOperator == false) {
         firstNumber = firstNumber + number;
-        console.log(firstNumber);
+        document.getElementById("display").innerHTML = firstNumber;
     } else {
         secondNumber = secondNumber + number;
-        console.log(secondNumber);
+        document.getElementById("display").innerHTML = secondNumber;
     }
 }
 
@@ -74,7 +74,7 @@ buttonSum.addEventListener('click', () => {
         calculus.splice(0, 2, sum); //since our array remains intact, we remove all previous values and insert the value of sum
         firstNumber = String(sum); 
         secondNumber = "";
-        console.log("This is the result of your calculus: " + calculus);
+        document.getElementById("display").innerHTML = calculus;
     }
 })
 

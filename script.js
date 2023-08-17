@@ -3,28 +3,60 @@ let secondNumber = "";
 let choseOperator = false;
 let calculus = [];
 
-
-//calculator number buttons
-const buttonSeven = document.querySelector('#seven');
-buttonSeven.addEventListener('click', () => {
+function insertNumber(number) {
     if (choseOperator == false) {
-        firstNumber = firstNumber + "7";
+        firstNumber = firstNumber + number;
         console.log(firstNumber);
     } else {
-        secondNumber = secondNumber + "7";
+        secondNumber = secondNumber + number;
         console.log(secondNumber);
     }
+}
+
+//calculator number buttons
+const buttonOne = document.querySelector('#one');
+buttonOne.addEventListener('click', () => {
+    insertNumber("1");
+});
+
+const buttonTwo = document.querySelector('#two');
+buttonTwo.addEventListener('click', () => {
+    insertNumber("2");
+});
+
+const buttonThree = document.querySelector('#three');
+buttonThree.addEventListener('click', () => {
+    insertNumber("3");
+});
+
+const buttonFour = document.querySelector('#four');
+buttonFour.addEventListener('click', () => {
+    insertNumber("4");
+});
+
+const buttonFive = document.querySelector('#five');
+buttonFive.addEventListener('click', () => {
+    insertNumber("5");
+});
+
+const buttonSix = document.querySelector('#six');
+buttonSix.addEventListener('click', () => {
+    insertNumber("6");
+});
+
+const buttonSeven = document.querySelector('#seven');
+buttonSeven.addEventListener('click', () => {
+    insertNumber("7");
 });
 
 const buttonEight = document.querySelector('#eight');
 buttonEight.addEventListener('click', () => {
-    if (choseOperator == false) {
-        firstNumber = firstNumber + "8";
-        console.log(firstNumber);
-    } else {
-        secondNumber = secondNumber + "8";
-        console.log(secondNumber);
-    }
+    insertNumber("8");
+});
+
+const buttonNine = document.querySelector('#nine');
+buttonNine.addEventListener('click', () => {
+    insertNumber("9");
 });
 
 //calculator operator buttons
@@ -40,7 +72,7 @@ buttonSum.addEventListener('click', () => {
         calculus.push(secondValue); //that number is pushed into the end of our array, which now has an index of 1 ([x, x])
         let sum = calculus.reduce((accumulator, current) => accumulator + current, 0); //we get the sum of the numbers inside our array
         calculus.splice(0, 2, sum); //since our array remains intact, we remove all previous values and insert the value of sum
-        firstNumber = String(sum);
+        firstNumber = String(sum); 
         secondNumber = "";
         console.log("This is the result of your calculus: " + calculus);
         console.log("This is our first number: " + firstNumber);

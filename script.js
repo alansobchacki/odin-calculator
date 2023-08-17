@@ -60,7 +60,7 @@ buttonNine.addEventListener('click', () => {
 });
 
 //calculator operator buttons
-const buttonSum = document.querySelector('#sum');
+const buttonSum = document.querySelector('#plus');
 buttonSum.addEventListener('click', () => {
     if (choseOperator == false && calculus.length < 1) {
         let initialValue = Number(firstNumber); //the string becomes a number
@@ -75,8 +75,6 @@ buttonSum.addEventListener('click', () => {
         firstNumber = String(sum); 
         secondNumber = "";
         console.log("This is the result of your calculus: " + calculus);
-        console.log("This is our first number: " + firstNumber);
-        console.log("This is our second number: " + secondNumber);
     }
 })
 

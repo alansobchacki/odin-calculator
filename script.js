@@ -1,25 +1,35 @@
 let previousNumber = "";
-let currentOperator = "";
 let currentNumber = "";
 let calculus = [];
 let isOperatorSelected = false;
-let isBuildingCurrentNumber = false;
+let isMinusPressed = false;
+
+// function to update the displays of our calculator
+
+function updateDisplay(operator) {
+    
+}
 
 // function to insert a number into the calculator
 function insertNumber(number) {
-    if (isOperatorSelected == false) {
+    if (calculus.length <= 1) {
+        if (isMinusPressed === true) {
+            previousNumber = previousNumber - number;
+            calculus.splice(0, 1, previousNumber);
+            console.log(calculus);
+        } else {
         previousNumber = previousNumber + number;
         calculus.splice(0, 1, previousNumber);
-        document.getElementById("display-bottom").innerHTML = previousNumber;
         console.log(calculus);
+        }
     } else {
         currentNumber = currentNumber + number;
-        document.getElementById("display-bottom").innerHTML = currentNumber;
         calculus.splice(2, 1, currentNumber);
         console.log(calculus);
     }
 }
 
+// function to update our array and the calculator with current values
 function updateCalculus(operator) { 
     calculus.splice(0, 3, String(result));
     calculus.splice(1, 1, operator);
@@ -51,29 +61,6 @@ function calculate(operator) {
     }
 }
 
-// function to make the equal button work
-function equalsTo() {
-    let previousTop = previousNumber;
-    let currentTop = currentNumber;
-    
-    if (inputingCurrentNumber === true) {
-        if (calculusResults === 'sum') {
-            calculate('sum');
-            document.getElementById("display-top").innerHTML = previousTop + ' + ' + currentTop + ' = ';
-        } else if (calculusResults === 'minus') {
-            calculate('minus');
-            document.getElementById("display-top").innerHTML = previousTop + ' - ' + currentTop + ' = ';
-        } else if (calculusResults === 'times') {
-            calculate('times');
-            document.getElementById("display-top").innerHTML = previousTop + ' * ' + currentTop + ' = ';
-        } else if (calculusResults === 'divide') {
-            calculate('divide');
-            document.getElementById("display-top").innerHTML = previousTop + ' / ' + currentTop + ' = ';
-        }      
-        inputingCurrentNumber = false;
-    }
-}
-
 // the section below is used only for buttons
 // calculator operator buttons
 const buttonSum = document.querySelector('#plus');
@@ -83,6 +70,7 @@ buttonSum.addEventListener('click', () => {
 
 const buttonMinus = document.querySelector('#minus');
 buttonMinus.addEventListener('click', () => {
+    isMinusPressed = true;
     calculate('-');
 })
 
@@ -98,7 +86,7 @@ buttonDivide.addEventListener('click', () => {
 
 const buttonEqual = document.querySelector('#equal');
 buttonEqual.addEventListener('click', () => {
-    equalsTo();
+    calculate();
 })
 
 //calculator number buttons

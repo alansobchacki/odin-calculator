@@ -10,7 +10,7 @@ body {
     justify-content: space-evenly;
     width: 40%;
     height: 500px;
-    border: 1px solid gray;
+    border: 5px solid gray;
     margin-top: 2%;
 }
 
@@ -23,6 +23,7 @@ body {
     width: 96%;
     height: 20%;
     font-size: 36px;
+    margin-top: 1%;
     color: white;
 }
 

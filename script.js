@@ -1,16 +1,10 @@
-// stuff to solve
-// 1 - cannot add more than one 'dot' to a number
-// 2 - 'zero' cannot be added multiple times as a first number (i.e, you cannot enter '0000', but you can enter '8000)
-// 3 -  add a backspace button that erases the last value of the current string (i.e, '72' becomes '7')
-// 4 -  add a C button (clear) that erases everything and resets the calculator to its default settings
-// 5 -  add a CE button (clear entry) that erases the entire, most recent entry
-// 6 -  add a equal buttont that returns the value of the operation
-
 let previousNumber = "";
 let currentNumber = "";
-let finalCalculus = "";
+let calculusResults = "";
 let isOperatorSelected = false;
+let inputingCurrentNumber = false;
 
+// function to insert a number into the calculator
 function insertNumber(number) {
     if (isOperatorSelected == false) {
         previousNumber = previousNumber + number;
@@ -18,51 +12,74 @@ function insertNumber(number) {
     } else {
         currentNumber = currentNumber + number;
         document.getElementById("display-bottom").innerHTML = currentNumber;
+        inputingCurrentNumber = true;
     }
 }
 
+// function to run the calculus of the user's inputs
 function calculate(operator) {
     isOperatorSelected = true;
-
+    let previous = Number(previousNumber);
+    let current = Number(currentNumber);
     if (operator === 'sum') {
-        let previous = Number(previousNumber);
-        let current = Number(currentNumber);
+        document.getElementById("display-top").innerHTML = previousNumber + ' + ';
         let calculus = previous + current;
         previousNumber = String(calculus);
-        document.getElementById("display-top").innerHTML = previousNumber + ' + ';
-        finalCalculus = 'sum';
+        calculusResults = 'sum';
     } else if (operator === 'minus') {
-        let previous = Number(previousNumber);
-        let current = Number(currentNumber);
+        if (previous === 0) {
+            previousNumber = -previous;
+        }
         let calculus = previous - current;
         previousNumber = String(calculus);
         document.getElementById("display-top").innerHTML = previousNumber + ' - ';
-        finalCalculus = 'minus';
+        calculusResults = 'minus';
     } else if (operator === 'times') {
-        let previous = Number(previousNumber);
-        let current = Number(currentNumber);
-        if (current != 0) {
-            let calculus = previous * current;
-            previousNumber = String(calculus);
+        if (inputingCurrentNumber === false) {
+            current = 1;
         }
+        let calculus = previous * current;
+        previousNumber = String(calculus);
         document.getElementById("display-top").innerHTML = previousNumber + ' * ';
-        finalCalculus = 'times';
+        calculusResults = 'times';
     } else if (operator === 'divide') {
-        let previous = Number(previousNumber);
-        let current = Number(currentNumber);
         if (current != 0) {
             let calculus = previous / current;
             previousNumber = String(calculus);
         }
         document.getElementById("display-top").innerHTML = previousNumber + ' / ';
-        finalCalculus = 'divide';
+        calculusResults = 'divide';
     }
-
     document.getElementById("display-bottom").innerHTML = previousNumber;
     currentNumber = "";
+    inputingCurrentNumber = false;
 }
 
-//calculator operator buttons
+// function to make the equal button work
+function equalsTo() {
+    let previousTop = previousNumber;
+    let currentTop = currentNumber;
+    
+    if (inputingCurrentNumber === true) {
+        if (calculusResults === 'sum') {
+            calculate('sum');
+            document.getElementById("display-top").innerHTML = previousTop + ' + ' + currentTop + ' = ';
+        } else if (calculusResults === 'minus') {
+            calculate('minus');
+            document.getElementById("display-top").innerHTML = previousTop + ' - ' + currentTop + ' = ';
+        } else if (calculusResults === 'times') {
+            calculate('times');
+            document.getElementById("display-top").innerHTML = previousTop + ' * ' + currentTop + ' = ';
+        } else if (calculusResults === 'divide') {
+            calculate('divide');
+            document.getElementById("display-top").innerHTML = previousTop + ' / ' + currentTop + ' = ';
+        }      
+        inputingCurrentNumber = false;
+    }
+}
+
+// the section below is used only for buttons
+// calculator operator buttons
 const buttonSum = document.querySelector('#plus');
 buttonSum.addEventListener('click', () => {
     document.getElementById("display-top").innerHTML = previousNumber + ' + ';
@@ -89,31 +106,7 @@ buttonDivide.addEventListener('click', () => {
 
 const buttonEqual = document.querySelector('#equal');
 buttonEqual.addEventListener('click', () => {
-    if (finalCalculus === 'sum') {
-        let previousTop = previousNumber;
-        let currentTop = currentNumber;
-        calculate('sum');
-        document.getElementById("display-top").innerHTML = previousTop + ' + ' + currentTop + ' = ';
-        console.log(finalCalculus);
-    } else if (finalCalculus === 'minus') {
-        let previousTop = previousNumber;
-        let currentTop = currentNumber;
-        calculate('minus');
-        document.getElementById("display-top").innerHTML = previousTop + ' - ' + currentTop + ' = ';
-        console.log(finalCalculus);
-    } else if (finalCalculus === 'times') {
-        let previousTop = previousNumber;
-        let currentTop = currentNumber;
-        calculate('times');
-        document.getElementById("display-top").innerHTML = previousTop + ' * ' + currentTop + ' = ';
-        console.log(finalCalculus);
-    } else if (finalCalculus === 'divide') {
-        let previousTop = previousNumber;
-        let currentTop = currentNumber;
-        calculate('divide');
-        document.getElementById("display-top").innerHTML = previousTop + ' / ' + currentTop + ' = ';
-        console.log(finalCalculus);
-    }
+    equalsTo();
 })
 
 //calculator number buttons

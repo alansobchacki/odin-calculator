@@ -4,10 +4,14 @@ let calculus = [];
 let isOperatorSelected = false;
 let isMinusPressed = false;
 
-// function to update the displays of our calculator
-
-function updateDisplay(operator) {
-    
+// function to update the display values of the calculator
+function updateDisplay() {
+    document.getElementById("display-top").innerHTML = calculus.join(' ');
+    if (calculus.length === 1 || calculus.length === 2) {
+        document.getElementById("display-bottom").innerHTML = calculus[0];
+    } else if (calculus.length === 3) {
+        document.getElementById("display-bottom").innerHTML = calculus[2];
+    }
 }
 
 // function to insert a number into the calculator
@@ -16,16 +20,16 @@ function insertNumber(number) {
         if (isMinusPressed === true) {
             previousNumber = previousNumber - number;
             calculus.splice(0, 1, previousNumber);
-            console.log(calculus);
+            updateDisplay();
         } else {
         previousNumber = previousNumber + number;
         calculus.splice(0, 1, previousNumber);
-        console.log(calculus);
+        updateDisplay();
         }
     } else {
         currentNumber = currentNumber + number;
         calculus.splice(2, 1, currentNumber);
-        console.log(calculus);
+        updateDisplay();
     }
 }
 
@@ -34,16 +38,15 @@ function updateCalculus(operator) {
     calculus.splice(0, 3, String(result));
     calculus.splice(1, 1, operator);
     currentNumber = "";
-    console.log(calculus);
+    updateDisplay();
 }
 
 // function to run the calculus of the user's inputs
 function calculate(operator) {
     isOperatorSelected = true;
-
     if (calculus.length === 1 || calculus.length === 2) {
         calculus.splice(1, 1, operator);
-        console.log(calculus);
+        updateDisplay();
     } else if (calculus.length === 3) {
         if (calculus[1] === '+') {
             result = Number(calculus[0]) + Number(calculus[2]);
@@ -86,7 +89,7 @@ buttonDivide.addEventListener('click', () => {
 
 const buttonEqual = document.querySelector('#equal');
 buttonEqual.addEventListener('click', () => {
-    calculate();
+    calculate('=');
 })
 
 //calculator number buttons

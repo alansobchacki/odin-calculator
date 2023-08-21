@@ -1,6 +1,4 @@
 // needs to limit the output of dots to only one, and only after the initial number output
-
-// needs a backspace button
 // needs a clear entry button
 // needs a clear button
 // needs to prevent zeros from being used at the start of a number (unless if used with a dot)
@@ -114,7 +112,20 @@ buttonDot.addEventListener('click', () => {
 
 const buttonBackspace = document.querySelector('#backspace');
 buttonBackspace.addEventListener('click', () => {
-    
+    if (calculus.length === 1) {
+        let erasingPrevious = calculus[0];
+        let erased = erasingPrevious.slice(0, -1);
+        calculus.splice(0, 1, erased);
+        previousNumber = erased;
+        updateDisplay();
+    } else if (calculus.length === 3) {
+        console.log(calculus);
+        let erasingCurrent = calculus[2];
+        let erased = erasingCurrent.slice(0, -1);
+        calculus.splice(2, 1, erased);
+        currentNumber = erased;
+        updateDisplay();
+    }
 });
 
 const buttonClearEntry = document.querySelector('#clear-entry');

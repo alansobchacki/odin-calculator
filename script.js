@@ -1,9 +1,16 @@
+// STUFF TO DO //
 // needs to limit the output of dots to only one, and only after the initial number output
 // needs to prevent zeros from being used at the start of a number (unless if used with a dot)
-// needs to allow users to use the keyboard to press keys
 // needs graphical revamp
 // needs a footer with your name & copyright logo
 
+// code mostly works like this:
+// we have an empty array called "calculus"
+// if this array has an index of 2 (3 items), it is ready to perform an operation (i,e. ['3', '+', '8'] will input '11')
+// if the index is lower than 2, the user will either input a number, or an operator
+// we remove/insert values into our array using the splice method
+
+// global variables to make everything work
 let previousNumber = "";
 let currentNumber = "";
 let calculus = [];
@@ -103,6 +110,7 @@ function clear() {
     updateDisplay();
 }
 
+// function to make the clear entry button work
 function clearEntry() {
     if (calculus.length === 1) { 
         calculus.splice(0, 1);
@@ -118,40 +126,74 @@ function clearEntry() {
 // the section below is used only for buttons
 // calculator operator buttons
 const buttonSum = document.querySelector('#plus');
-buttonSum.addEventListener('click', () => {
-    calculate('+');
-})
+buttonSum.addEventListener('click', () => calculate('+'));
+document.addEventListener('keydown', (event) => {
+    if (event.key === '+') {
+        calculate('+');
+    }
+});
 
 const buttonMinus = document.querySelector('#minus');
 buttonMinus.addEventListener('click', () => {
     isMinusPressed = true;
     calculate('-');
-})
+});
+document.addEventListener('keydown', (event) => {
+    if (event.key === '-') {
+        isMinusPressed = true;
+        calculate('-');
+    }
+});
 
 const buttonTimes = document.querySelector('#times');
 buttonTimes.addEventListener('click', () => {
     calculate('*');
-})
+});
+document.addEventListener('keydown', (event) => {
+    if (event.key === '*') {
+        calculate('*');
+    }
+});
 
 const buttonDivide = document.querySelector('#divide');
 buttonDivide.addEventListener('click', () => {
     calculate('/');
-})
+});
+document.addEventListener('keydown', (event) => {
+    if (event.key === '/') {
+        calculate('/');
+    }
+});
 
 const buttonEqual = document.querySelector('#equal');
 buttonEqual.addEventListener('click', () => {
     calculate('=');
-})
+});
+document.addEventListener('keydown', (event) => {
+    if (event.key === '=') {
+        calculate('=');
+    }
+});
 
-//calculator misc buttons
+// calculator misc buttons
 const buttonDot = document.querySelector('#dot');
 buttonDot.addEventListener('click', () => {
     insertNumber(".");
+});
+document.addEventListener('keydown', (event) => {
+    if (event.key === '.' || event.key === ',') {
+        insertNumber(".");
+    }
 });
 
 const buttonBackspace = document.querySelector('#backspace');
 buttonBackspace.addEventListener('click', () => {
     erasingNumber();
+});
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Backspace') {
+        erasingNumber();
+    }
 });
 
 const buttonClearEntry = document.querySelector('#clear-entry');
@@ -165,52 +207,12 @@ buttonClear.addEventListener('click', () => {
 });
 
 //calculator number buttons
-const buttonOne = document.querySelector('#one');
-buttonOne.addEventListener('click', () => {
-    insertNumber("1");
-});
-
-const buttonTwo = document.querySelector('#two');
-buttonTwo.addEventListener('click', () => {
-    insertNumber("2");
-});
-
-const buttonThree = document.querySelector('#three');
-buttonThree.addEventListener('click', () => {
-    insertNumber("3");
-});
-
-const buttonFour = document.querySelector('#four');
-buttonFour.addEventListener('click', () => {
-    insertNumber("4");
-});
-
-const buttonFive = document.querySelector('#five');
-buttonFive.addEventListener('click', () => {
-    insertNumber("5");
-});
-
-const buttonSix = document.querySelector('#six');
-buttonSix.addEventListener('click', () => {
-    insertNumber("6");
-});
-
-const buttonSeven = document.querySelector('#seven');
-buttonSeven.addEventListener('click', () => {
-    insertNumber("7");
-});
-
-const buttonEight = document.querySelector('#eight');
-buttonEight.addEventListener('click', () => {
-    insertNumber("8");
-});
-
-const buttonNine = document.querySelector('#nine');
-buttonNine.addEventListener('click', () => {
-    insertNumber("9");
-});
-
-const buttonZero = document.querySelector('#zero');
-buttonZero.addEventListener('click', () => {
-    insertNumber("0");
-});
+for (let i = 0; i <= 9; i++) {
+    const numberButton = document.querySelector(`#btn${i}`);
+    numberButton.addEventListener('click', () => insertNumber(i.toString()));
+    document.addEventListener('keydown', (event) => {
+        if (event.key === i.toString()) {
+            insertNumber(i.toString());
+        }
+    });
+}

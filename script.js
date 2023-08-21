@@ -1,6 +1,5 @@
 // needs to limit the output of dots to only one, and only after the initial number output
 // needs a clear entry button
-// needs a clear button
 // needs to prevent zeros from being used at the start of a number (unless if used with a dot)
 // needs to allow users to use the keyboard to press keys
 // needs graphical revamp
@@ -19,6 +18,9 @@ function updateDisplay() {
         document.getElementById("display-bottom").innerHTML = calculus[0];
     } else if (calculus.length === 3) {
         document.getElementById("display-bottom").innerHTML = calculus[2];
+    } else {
+        document.getElementById("display-top").innerHTML = '';
+        document.getElementById("display-bottom").innerHTML = 0;
     }
 }
 
@@ -76,6 +78,32 @@ function calculate(operator) {
     }
 }
 
+// function to make the backspace button work
+function erasingNumber() { 
+    if (calculus.length === 1) {
+        let erasingPrevious = calculus[0];
+        let erased = erasingPrevious.slice(0, -1);
+        calculus.splice(0, 1, erased);
+        previousNumber = erased;
+        updateDisplay();
+    } else if (calculus.length === 3) {
+        let erasingCurrent = calculus[2];
+        let erased = erasingCurrent.slice(0, -1);
+        calculus.splice(2, 1, erased);
+        currentNumber = erased;
+        updateDisplay();
+    }
+}
+
+// function to make the clear button work
+function clear() {
+    isOperatorSelected = false;
+    calculus.splice(0, 3);
+    currentNumber = "";
+    previousNumber = "";
+    updateDisplay();
+}
+
 // the section below is used only for buttons
 // calculator operator buttons
 const buttonSum = document.querySelector('#plus');
@@ -112,20 +140,7 @@ buttonDot.addEventListener('click', () => {
 
 const buttonBackspace = document.querySelector('#backspace');
 buttonBackspace.addEventListener('click', () => {
-    if (calculus.length === 1) {
-        let erasingPrevious = calculus[0];
-        let erased = erasingPrevious.slice(0, -1);
-        calculus.splice(0, 1, erased);
-        previousNumber = erased;
-        updateDisplay();
-    } else if (calculus.length === 3) {
-        console.log(calculus);
-        let erasingCurrent = calculus[2];
-        let erased = erasingCurrent.slice(0, -1);
-        calculus.splice(2, 1, erased);
-        currentNumber = erased;
-        updateDisplay();
-    }
+    erasingNumber();
 });
 
 const buttonClearEntry = document.querySelector('#clear-entry');
@@ -135,7 +150,7 @@ buttonClearEntry.addEventListener('click', () => {
 
 const buttonClear = document.querySelector('#clear');
 buttonClear.addEventListener('click', () => {
-    
+    clear();
 });
 
 //calculator number buttons

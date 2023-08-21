@@ -59,16 +59,16 @@ function calculate(operator) {
         updateDisplay();
     } else if (calculus.length === 3) {
         if (calculus[1] === '+') {
-            result = Math.round(Number(calculus[0]) + Number(calculus[2]) * 10) / 10;
+            result = Number(calculus[0]) + Number(calculus[2]);
             updateCalculus(operator);
         } else if (calculus[1] === '-') {
-            result = Math.round(Number(calculus[0]) - Number(calculus[2]) * 10) / 10;
+            result = Number(calculus[0]) - Number(calculus[2]);
             updateCalculus(operator);
         } else if (calculus[1] === '*') {
-            result = Math.round(Number(calculus[0]) * Number(calculus[2]) * 10) / 10;
+            result = Math.round(Number(calculus[0]) * Number(calculus[2]) * 1000) / 1000;
             updateCalculus(operator);
         } else if (calculus[1] === '/') {
-            result = Math.round(Number(calculus[0]) / Number(calculus[2]) * 10) / 10;
+            result = Math.round(Number(calculus[0]) / Number(calculus[2]) * 1000) / 1000;
             updateCalculus(operator);
         }
     }

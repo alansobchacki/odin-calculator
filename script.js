@@ -1,5 +1,4 @@
 // needs to limit the output of dots to only one, and only after the initial number output
-// needs a clear entry button
 // needs to prevent zeros from being used at the start of a number (unless if used with a dot)
 // needs to allow users to use the keyboard to press keys
 // needs graphical revamp
@@ -104,6 +103,18 @@ function clear() {
     updateDisplay();
 }
 
+function clearEntry() {
+    if (calculus.length === 1) { 
+        calculus.splice(0, 1);
+        previousNumber = "";
+        updateDisplay();
+    } else if (calculus.length === 3) {
+        calculus.splice(2, 1);
+        currentNumber = "";
+        updateDisplay();
+    }
+}
+
 // the section below is used only for buttons
 // calculator operator buttons
 const buttonSum = document.querySelector('#plus');
@@ -145,7 +156,7 @@ buttonBackspace.addEventListener('click', () => {
 
 const buttonClearEntry = document.querySelector('#clear-entry');
 buttonClearEntry.addEventListener('click', () => {
-    
+    clearEntry();
 });
 
 const buttonClear = document.querySelector('#clear');

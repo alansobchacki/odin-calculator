@@ -1,3 +1,13 @@
+// needs to limit the output of dots to only one, and only after the initial number output
+
+// needs a backspace button
+// needs a clear entry button
+// needs a clear button
+// needs to prevent zeros from being used at the start of a number (unless if used with a dot)
+// needs to allow users to use the keyboard to press keys
+// needs graphical revamp
+// needs a footer with your name & copyright logo
+
 let previousNumber = "";
 let currentNumber = "";
 let calculus = [];
@@ -49,16 +59,16 @@ function calculate(operator) {
         updateDisplay();
     } else if (calculus.length === 3) {
         if (calculus[1] === '+') {
-            result = Number(calculus[0]) + Number(calculus[2]);
+            result = Math.round(Number(calculus[0]) + Number(calculus[2]) * 10) / 10;
             updateCalculus(operator);
         } else if (calculus[1] === '-') {
-            result = Number(calculus[0]) - Number(calculus[2]);
+            result = Math.round(Number(calculus[0]) - Number(calculus[2]) * 10) / 10;
             updateCalculus(operator);
         } else if (calculus[1] === '*') {
-            result = Number(calculus[0]) * Number(calculus[2]);
+            result = Math.round(Number(calculus[0]) * Number(calculus[2]) * 10) / 10;
             updateCalculus(operator);
         } else if (calculus[1] === '/') {
-            result = Number(calculus[0]) / Number(calculus[2]);
+            result = Math.round(Number(calculus[0]) / Number(calculus[2]) * 10) / 10;
             updateCalculus(operator);
         }
     }
@@ -91,6 +101,27 @@ const buttonEqual = document.querySelector('#equal');
 buttonEqual.addEventListener('click', () => {
     calculate('=');
 })
+
+//calculator misc buttons
+const buttonDot = document.querySelector('#dot');
+buttonDot.addEventListener('click', () => {
+    insertNumber(".");
+});
+
+const buttonBackspace = document.querySelector('#backspace');
+buttonBackspace.addEventListener('click', () => {
+    
+});
+
+const buttonClearEntry = document.querySelector('#clear-entry');
+buttonClearEntry.addEventListener('click', () => {
+    
+});
+
+const buttonClear = document.querySelector('#clear');
+buttonClear.addEventListener('click', () => {
+    
+});
 
 //calculator number buttons
 const buttonOne = document.querySelector('#one');
@@ -141,9 +172,4 @@ buttonNine.addEventListener('click', () => {
 const buttonZero = document.querySelector('#zero');
 buttonZero.addEventListener('click', () => {
     insertNumber("0");
-});
-
-const buttonDot = document.querySelector('#dot');
-buttonDot.addEventListener('click', () => {
-    insertNumber(".");
 });

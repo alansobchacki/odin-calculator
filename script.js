@@ -68,8 +68,12 @@ function calculate(operator) {
             result = Math.round(Number(calculus[0]) * Number(calculus[2]) * 1000) / 1000;
             updateCalculus(operator);
         } else if (calculus[1] === '/') {
+            if (calculus[2] === '0') {
+                calculus.splice(2, 1, '1');
+                updateDisplay();   
+            } 
             result = Math.round(Number(calculus[0]) / Number(calculus[2]) * 1000) / 1000;
-            updateCalculus(operator);
+            updateCalculus(operator);           
         }
     }
 }

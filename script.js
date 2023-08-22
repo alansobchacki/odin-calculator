@@ -168,6 +168,7 @@ const buttonTimes = document.querySelector('#times');
 buttonTimes.addEventListener('click', () => {
     calculate('*');
 });
+
 document.addEventListener('keydown', (event) => {
     if (event.key === '*') {
         calculate('*');
@@ -178,6 +179,7 @@ const buttonDivide = document.querySelector('#divide');
 buttonDivide.addEventListener('click', () => {
     calculate('/');
 });
+
 document.addEventListener('keydown', (event) => {
     if (event.key === '/') {
         calculate('/');
@@ -188,6 +190,7 @@ const buttonEqual = document.querySelector('#equal');
 buttonEqual.addEventListener('click', () => {
     calculate('=');
 });
+
 document.addEventListener('keydown', (event) => {
     if (event.key === '=' || event.key === 'Enter') {
         calculate('=');
@@ -199,6 +202,7 @@ const buttonDot = document.querySelector('#dot');
 buttonDot.addEventListener('click', () => {
     insertNumber(".");
 });
+
 document.addEventListener('keydown', (event) => {
     if (event.key === '.' || event.key === ',') {
         insertNumber(".");
@@ -209,6 +213,7 @@ const buttonBackspace = document.querySelector('#backspace');
 buttonBackspace.addEventListener('click', () => {
     erasingNumber();
 });
+
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Backspace') {
         erasingNumber();
@@ -225,7 +230,7 @@ buttonClear.addEventListener('click', () => {
     clear();
 });
 
-//calculator number buttons
+// calculator number buttons
 for (let i = 0; i <= 9; i++) {
     const numberButton = document.querySelector(`#btn${i}`);
     numberButton.addEventListener('click', () => insertNumber(i.toString()));
@@ -235,3 +240,22 @@ for (let i = 0; i <= 9; i++) {
         }
     });
 }
+
+// allows buttons to change color when pressed with the keyboard
+
+const buttons = document.querySelectorAll(".button");
+
+document.addEventListener("keydown", (event) => {
+  const key = event.key;
+  const button = Array.from(buttons).find(btn => btn.textContent === key);
+  
+  if (button) {
+    button.classList.add("pressed");
+  }
+});
+
+document.addEventListener("keyup", () => {
+  buttons.forEach(button => {
+    button.classList.remove("pressed");
+  });
+});

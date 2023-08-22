@@ -1,6 +1,4 @@
 // STUFF TO DO //
-// needs to limit the output of dots to only one, and only after the initial number output
-// needs to prevent zeros from being used at the start of a number (unless if used with a dot)
 // needs graphical revamp
 // needs a footer with your name & copyright logo
 
@@ -11,11 +9,13 @@
 // we remove/insert values into our array using the splice method
 
 // global variables to make everything work
+const numberPattern = /^(?!0\d)(-?(?!0\d)\d+(\.\d*)?)$/;
 let previousNumber = "";
 let currentNumber = "";
 let calculus = [];
 let isOperatorSelected = false;
 let isMinusPressed = false;
+let isNumberValid = false;
 
 // function to update the display values of the calculator
 function updateDisplay() {
@@ -35,17 +35,36 @@ function insertNumber(number) {
     if (calculus.length <= 1) {
         if (isMinusPressed === true) {
             previousNumber = previousNumber - number;
-            calculus.splice(0, 1, previousNumber);
-            updateDisplay();
+            isNumberValid = numberPattern.test(previousNumber);
+            if (isNumberValid === true) { 
+                calculus.splice(0, 1, previousNumber);
+                updateDisplay();
+            } else {
+                previousNumber = previousNumber.slice(0, -1);
+                updateDisplay();
+            }
+            isMinusPressed = false;
         } else {
-        previousNumber = previousNumber + number;
-        calculus.splice(0, 1, previousNumber);
-        updateDisplay();
+            previousNumber = previousNumber + number;
+            isNumberValid = numberPattern.test(previousNumber);
+                if (isNumberValid === true) { 
+                    calculus.splice(0, 1, previousNumber);
+                    updateDisplay();
+                } else {
+                    previousNumber = previousNumber.slice(0, -1);
+                    updateDisplay();
+                }
         }
     } else {
         currentNumber = currentNumber + number;
-        calculus.splice(2, 1, currentNumber);
-        updateDisplay();
+        isNumberValid = numberPattern.test(currentNumber);
+            if (isNumberValid === true) {
+                calculus.splice(2, 1, currentNumber);
+                updateDisplay();
+            } else {
+                currentNumber = currentNumber.slice(0, -1);
+                updateDisplay();
+            }
     }
 }
 
@@ -170,7 +189,7 @@ buttonEqual.addEventListener('click', () => {
     calculate('=');
 });
 document.addEventListener('keydown', (event) => {
-    if (event.key === '=') {
+    if (event.key === '=' || event.key === 'Enter') {
         calculate('=');
     }
 });

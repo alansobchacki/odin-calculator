@@ -29,7 +29,7 @@ This project was completed as part of [The Odin Project](https://www.theodinproj
 
 These were the project requirements:
 
-- [x] Start by creating add, subtract, multiply, and divide functions.
+- [x] Start by creating `add`, `subtract`, `multiply`, and `divide` functions.
 - [x] Create three variables for each of the parts of a calculator operation. Create a variable for the first number, the operator, and the second number.
 - [x] Create a new function `operate` that takes an operator and 2 numbers and then calls one of the above functions on the numbers.
 - [x] Create a basic HTML calculator with buttons for each digit, each of the above functions and an “Equals” key.
@@ -55,6 +55,6 @@ Building this was both hard and fun.
 
 I tried my best to make it bug-free, but I'm pretty sure there are some bugs here and there. 
 
-Still, it's mostly functional, and I think I can move forward.
+Still, it's mostly functional, and my time is better spent building new shiny toys.
 
-P.S - If you were bored enough to test this out and found a bug, let me know. I probably won’t fix them, but I’ll definitely appreciate your effort in trying it out!
+P.S. - If you were bored enough to test this out and found a bug, let me know. I probably won’t fix them, but I’ll definitely appreciate your effort in trying it out!

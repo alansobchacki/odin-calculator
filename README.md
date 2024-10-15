@@ -35,7 +35,9 @@ These were the project requirements:
 - [x] Create a basic HTML calculator with buttons for each digit, each of the above functions and an “Equals” key.
 - [x] Create the functions that populate the display when you click the number buttons.
 - [x] You’ll need to store the first number and second number that are input into the calculator, utilize the operator that the user selects, and then operate() on the two numbers when the user presses the “=” key.
+
 -- Extra credit
+
 - [x] Add a . button and let users input decimals! Make sure you don’t let them type more than one though: 12.3.56.5. It is hard to do math on these numbers.
 - [x] Add a “backspace” button, so the user can undo if they click the wrong number.
 - [x] Add keyboard support!
